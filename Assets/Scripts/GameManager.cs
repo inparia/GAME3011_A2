@@ -51,6 +51,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    public void gameStart()
+    {
         Cursor.visible = false;
         ableToMove = false;
         durability = 1000;
@@ -59,11 +64,13 @@ public class GameManager : MonoBehaviour
         gameSetup();
         createRandomInt();
     }
-
     // Update is called once per frame
     void Update()
     {
-        
+        if(gameWin)
+        {
+            Cursor.visible = true;
+        }
     }
 
     void createRandomInt()
@@ -85,6 +92,8 @@ public class GameManager : MonoBehaviour
         {
             defaultDifficulty -= 98;
         }
+
     }
+
 }
 

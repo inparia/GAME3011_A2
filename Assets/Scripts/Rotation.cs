@@ -30,6 +30,11 @@ public class Rotation : MonoBehaviour
 
             rotation += rotY * Time.deltaTime;
             transform.Rotate(0, 0, rotY * Time.deltaTime, Space.Self);
+
+            if(rotation >= 90)
+            {
+                GameManager.Instance.gameWin = true;
+            }
         }
     }
 }
