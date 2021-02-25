@@ -7,12 +7,23 @@ public class GetMousePos : MonoBehaviour
 
     public GameObject center;
     public GameObject lockPick;
-    public float durabilityDown = 10.0f;
+    private float durabilityDown;
     private float angle;
     // Start is called before the first frame update
     void Start()
     {
-
+        if(GameManager.Instance.gameLevel == GameLevel.EASY)
+        {
+            durabilityDown = 10.0f;
+        }
+        else if(GameManager.Instance.gameLevel == GameLevel.NORMAL)
+        {
+            durabilityDown = 30.0f;
+        }
+        else if (GameManager.Instance.gameLevel == GameLevel.HARD)
+        {
+            durabilityDown = 50.0f;
+        }
     }
 
     // Update is called once per frame
@@ -45,12 +56,19 @@ public class GetMousePos : MonoBehaviour
             if (angle <= GameManager.Instance.startNode + GameManager.Instance.defaultDifficulty && angle >= GameManager.Instance.startNode - GameManager.Instance.defaultDifficulty)
             {
                 Debug.Log("Right Spot!");
-                GameManager.Instance.ableToMove = true;
+                if (!GameManager.Instance.gameLose && !GameManager.Instance.gameWin)
+                {
+                    GameManager.Instance.ableToMove = true;
+                }
+                
             }
             else
             {
                 Debug.Log("Wrong Spot!");
-                GameManager.Instance.durability -= durabilityDown * Time.deltaTime;
+                if (!GameManager.Instance.gameLose && !GameManager.Instance.gameWin)
+                {
+                    GameManager.Instance.durability -= durabilityDown * Time.deltaTime;
+                }
                 GameManager.Instance.ableToMove = false;
             }
         }
@@ -58,7 +76,6 @@ public class GetMousePos : MonoBehaviour
         {
             GameManager.Instance.ableToMove = false;
         }
-        Debug.Log(angle);
     }
 
 }

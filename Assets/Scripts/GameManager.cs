@@ -9,6 +9,13 @@ public enum GameLevel
     HARD
 }
 
+public enum PlayerSkill
+{
+    NOVICE,
+    EXPERT,
+    MENTOR
+}
+
 public class GameManager : MonoBehaviour
 {
 
@@ -47,7 +54,9 @@ public class GameManager : MonoBehaviour
     public float durability;
     public int defaultDifficulty;
     public GameLevel gameLevel;
-    public bool gameWin;
+    public PlayerSkill playerSkill;
+    public bool gameWin, gameLose;
+    public float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,18 +67,38 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         ableToMove = false;
-        durability = 1000;
+        durability = 150;
         gameWin = false;
+        gameLose = false;
         defaultDifficulty = 100;
         gameSetup();
+        checkPlayerSkill();
         createRandomInt();
     }
     // Update is called once per frame
     void Update()
     {
-        if(gameWin)
+        if(gameWin || gameLose)
         {
             Cursor.visible = true;
+        }
+
+        if(durability <= 0)
+        {
+            durability = 0;
+            gameLose = true;
+        }
+
+        if (timer > 0 && !gameLose && !gameWin)
+        {
+            timer -= Time.deltaTime;
+        }
+        else
+        {
+            if (!gameWin)
+            {
+                gameLose = true;
+            }
         }
     }
 
@@ -83,17 +112,38 @@ public class GameManager : MonoBehaviour
         if(gameLevel == GameLevel.EASY)
         {
             defaultDifficulty -= 85;
+            timer = 200;
         }
         else if (gameLevel == GameLevel.NORMAL)
         {
             defaultDifficulty -= 90;
+            timer = 100;
         }
         else if (gameLevel == GameLevel.HARD)
         {
             defaultDifficulty -= 98;
+            timer = 50;
         }
+
 
     }
 
+    void checkPlayerSkill()
+    {
+        if (playerSkill == PlayerSkill.NOVICE)
+        {
+            defaultDifficulty += 0;
+        }
+
+        else if (playerSkill == PlayerSkill.EXPERT)
+        {
+            defaultDifficulty += 5 ;
+        }
+
+        else if (playerSkill == PlayerSkill.MENTOR)
+        {
+            defaultDifficulty += 10;
+        }
+    }
 }
 

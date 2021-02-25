@@ -18,7 +18,7 @@ public class ButtonScript : MonoBehaviour
 
     public void buttonRetry()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("PlayerSkill");
         Cursor.visible = true;
     }
 
@@ -41,5 +41,23 @@ public class ButtonScript : MonoBehaviour
         GameManager.Instance.gameLevel = GameLevel.HARD;
         GameManager.Instance.gameStart();
         SceneManager.LoadScene("Game");
+    }
+
+    public void noviceSkill()
+    {
+        GameManager.Instance.playerSkill = PlayerSkill.NOVICE;
+        SceneManager.LoadScene("Main");
+    }
+
+    public void expertSkill()
+    {
+        GameManager.Instance.playerSkill = PlayerSkill.EXPERT;
+        SceneManager.LoadScene("Main");
+    }
+
+    public void mentorSkill()
+    {
+        GameManager.Instance.playerSkill = PlayerSkill.MENTOR;
+        SceneManager.LoadScene("Main");
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine;
 public class Rotation : MonoBehaviour
 {
     private int rotY;
-    public int setRotY;
-    public float rotation;
+    private int setRotY;
+    private float rotation;
     // Start is called before the first frame update
     void Start()
     {
+        setRotY = 100;
         rotY = 0;
     }
 

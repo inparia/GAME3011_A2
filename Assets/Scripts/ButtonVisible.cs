@@ -16,7 +16,7 @@ public class ButtonVisible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameWin)
+        if (GameManager.Instance.gameWin || GameManager.Instance.gameLose)
         {
             Cursor.visible = true;
             retryButton.gameObject.SetActive(true);
