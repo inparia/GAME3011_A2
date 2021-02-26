@@ -60,4 +60,9 @@ public class ButtonScript : MonoBehaviour
         GameManager.Instance.playerSkill = PlayerSkill.MENTOR;
         SceneManager.LoadScene("Main");
     }
+
+    public void gameExit()
+    {
+        Application.Quit();
+    }
 }
